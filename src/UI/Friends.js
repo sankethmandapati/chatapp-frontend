@@ -11,6 +11,7 @@ export default class Friends extends Component {
             friendSearch: '',
             isLoggedIn: true
         };
+        this.friends = [];
         this.friendsChangeListener = this.friendsChangeListener.bind(this);
         this.searchFriend = this.searchFriend.bind(this);
         this.logout = this.logout.bind(this);
@@ -23,6 +24,7 @@ export default class Friends extends Component {
         const friends = await socket.emit('get-friends', {querry: {}, selfId: socket.userDetails.userId});
         if(!this.props.selectedFriend._id && (friends.length > 0))
         this.selectFriend(friends[0]);
+        this.friends = friends;
         this.setState({friends});
     }
     async logout(e) {
@@ -36,12 +38,16 @@ export default class Friends extends Component {
         }
     }
     selectFriend(friend) {
-        console.log("friend: ", friend);
         this.props.selectFriend(friend);
     }
     searchFriend(e) {
         e.preventDefault();
         this.setState({friendSearch: e.target.value});
+        const pattern = e.target.value.toLowerCase();
+        const friends = this.friends.filter((friend) => {
+            return friend.name.toLowerCase().includes(pattern);
+        });
+        this.setState({friends});
     }
     render() {
         if(this.state.isLoggedIn) {

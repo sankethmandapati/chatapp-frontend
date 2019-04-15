@@ -13,14 +13,33 @@ export default class Chat extends Component {
         this.sendMessage = this.sendMessage.bind(this);
     }
     componentWillMount() {
-        console.log("this.props.selectedFriend: ", this.props.selectedFriend);
         this.socket = socket.getInstance();
         socket.listenForNewMessages(this.newMessageListener);
     }
-    componentWillUpdate() {
-        console.log("this.props: ", this.props);
+    componentWillReceiveProps(nextProps) {
+        if(this.props.selectedFriend._id != nextProps.selectedFriend._id) {
+            this.setState({messages: [], message: ''});
+            this.getChatHistory(nextProps.selectedFriend._id);
+        }
     }
-    getAllMessages() {}
+    async getChatHistory(friendId) {
+        try {
+            const chatHistory = await socket.emit('get-chat-history', {
+                myId: socket.userDetails.userId,
+                friendId
+            });
+            const sortedChat = chatHistory.sort((msg1, msg2) => {
+                const time1 = new Date(msg1.sentAt).getTime();
+                const time2 = new Date(msg2.sentAt).getTime();
+                const diff = (time1 - time2);
+                return diff;
+            });
+            this.setState({messages: sortedChat});
+        } catch(err) {
+            console.log("error: ", err);
+            alert("There was some problem in fetching chat history");
+        }
+    }
     sendMessage(e) {
         e.preventDefault();
         const messageObj = {
@@ -38,6 +57,7 @@ export default class Chat extends Component {
         this.setState({messages});
     }
     render() {
+        const chatArray = [...this.state.messages];
         return (
             <div className="chat__window">
                 <section className="statusBar">
@@ -50,7 +70,7 @@ export default class Chat extends Component {
                 <section className="chat__window--conversation">
                     <ul>
                         {
-                            this.state.messages.map((message, n) => {
+                            chatArray.reverse().map((message, n) => {
                                 return (
                                     <li key={'message_' + n} className={(socket.userDetails.userId === message.from) ? "my-message" : "friend-message"}>
                                         {

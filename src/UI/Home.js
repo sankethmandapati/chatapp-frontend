@@ -13,12 +13,11 @@ export default class ChatRooms extends Component {
     }
     componentWillMount() {}
     selectFriend(friend) {
-        console.log("get friend: ", friend);
         this.setState({selectedFriend: {...friend}}, () => {
-            console.log("state has set: ", this.state.selectedFriend);
             this.forceUpdate();
         });
     }
+
     render() {
         return (
             <div style={{display: 'flex', flexDirection: 'row', height: '100%'}}>

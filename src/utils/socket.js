@@ -10,18 +10,23 @@ class Socket {
             userId: '',
             userName: ''
         };
+        this.isConnected = false;
         this.setUserDetails = this.setUserDetails.bind(this);
         this.messageListener = this.messageListener.bind(this);
         this.friendsChangeListener = this.friendsChangeListener.bind(this);
         this.emit = this.emit.bind(this);
     }
     connect() {
-        console.log("connecting...");
-        this.socketInstance = socketIoClient(config.baseUrl.server, {
-            query: {
-                token: this.userDetails.accessToken
-            }
-        });
+        if(!this.isConnected) {
+            this.socketInstance = socketIoClient(config.baseUrl.local, {
+                query: {
+                    token: this.userDetails.accessToken
+                }
+            });
+            this.isConnected = true;
+        } else {
+            console.log("Duplicate connection");
+        }
     }
     disconnect() {
         this.userDetails = {
