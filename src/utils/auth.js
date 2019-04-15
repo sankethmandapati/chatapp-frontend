@@ -8,7 +8,7 @@ class Auth {
 		this.login = this.login.bind(this);
 		this.register = this.register.bind(this);
 		this.setUserDetailsToCookies = this.setUserDetailsToCookies.bind(this);
-		this.baseUrl = config.baseUrl.local;
+		this.baseUrl = config.baseUrl;
 	}
 	async logout() {
 		try {

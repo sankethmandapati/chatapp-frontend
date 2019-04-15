@@ -18,7 +18,7 @@ class Socket {
     }
     connect() {
         if(!this.isConnected) {
-            this.socketInstance = socketIoClient(config.baseUrl.local, {
+            this.socketInstance = socketIoClient(config.baseUrl, {
                 query: {
                     token: this.userDetails.accessToken
                 }
