@@ -17,16 +17,12 @@ class Socket {
         this.emit = this.emit.bind(this);
     }
     connect() {
-        if(!this.isConnected) {
-            this.socketInstance = socketIoClient(config.baseUrl, {
-                query: {
-                    token: this.userDetails.accessToken
-                }
-            });
-            this.isConnected = true;
-        } else {
-            console.log("Duplicate connection");
-        }
+        this.socketInstance = socketIoClient(config.baseUrl, {
+            query: {
+                token: this.userDetails.accessToken
+            }
+        });
+        this.isConnected = true;
     }
     disconnect() {
         this.userDetails = {
@@ -38,14 +34,19 @@ class Socket {
     }
     async setUserDetails(userDetails) {
         this.userDetails = userDetails;
-        this.connect();
-        this.messageListener();
+        if(!this.isConnected) {
+            this.connect();
+            this.messageListener();
+        } else {
+            console.log("Duplicate connection");
+        }
         return null;
     }
     getInstance() {
         return this.socketInstance;
     }
     messageListener() {
+        console.log("listening for new messages..");
         this.socketInstance.on("message", async (msg) => {
             this.messageObservers.forEach((fn) => fn(msg));
         });
