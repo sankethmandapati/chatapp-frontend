@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import socket from '../utils/socket';
+import "../styles/Chat.scss";
 
 export default class Chat extends Component {
     constructor(props) {

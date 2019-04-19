@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect, Link } from "react-router-dom";
 import Auth from '../utils/auth';
-import '../styles/login.scss';
+import '../styles/Login.scss';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -46,14 +46,22 @@ export default class Login extends Component {
 			return <Redirect to='/' />
 		} else {
 			return (
-                <div className="login-register">
-					<form onSubmit={this.login}>
-							<input type="email" onChange={this.userNameChange} placeholder="login id"/>
-							<input type="password" onChange={this.passwordChange} placeholder="login id"/>
-							<button type="submit">LOGIN</button>
-						<span>Not registered? <Link to="/register">Create an account</Link></span>
+                <section className="login__register">
+					<div className="backgorund-animation">
+						<img className="login__register--leftanime" src={require("../assets/left_conversation.png")} />
+					</div>
+					<form onSubmit={this.login} autoComplete="on">
+						<div className="login__register--leftconversation">
+							<input type="email" onChange={this.userNameChange} placeholder="Login id"/>
+							<input type="password" onChange={this.passwordChange} placeholder="Password"/>
+						</div>
+						<button type="submit">LOGIN</button>
+						<span className="login__register--leftconversation">Not registered? <Link to="/register">Create an account</Link></span>
 					</form>
-				</div>
+					<div className="backgorund-animation">
+						<img className="login__register--rightanime" src={require("../assets/right_conversation.png")} />
+					</div>
+				</section>
 			);
 		}
 	}
