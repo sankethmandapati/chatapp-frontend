@@ -23,7 +23,7 @@ export default class Friends extends Component {
     async friendsChangeListener() {
         const friends = await socket.emit('get-friends', {querry: {}, selfId: socket.userDetails.userId});
         if(!this.props.selectedFriend._id && (friends.length > 0))
-        this.selectFriend(friends[0]);
+        this.props.selectFriend(friends[0]);
         this.friends = friends;
         this.setState({friends});
     }
@@ -36,9 +36,6 @@ export default class Friends extends Component {
             console.log("error: ", err);
             alert("There was some problem while trying to logout");
         }
-    }
-    selectFriend(friend) {
-        this.props.selectFriend(friend);
     }
     searchFriend(e) {
         e.preventDefault();
@@ -59,7 +56,7 @@ export default class Friends extends Component {
                                 socket.userDetails.userName
                             }
                         </p>
-                        <a href="#" onClick={this.logout}>Logout</a>
+                        <a href="/login" onClick={this.logout}>Logout</a>
                     </section>
                     <section className="friends__searchbar">
                         <input type="text" value={this.state.friendSearch} onChange={this.searchFriend} placeholder="Search or start new chat" />
@@ -68,8 +65,11 @@ export default class Friends extends Component {
                         {
                             this.state.friends.map((friend, n) => {
                                 return (
-                                    <a href="#" key={'friend_' + n} className={friend.isOnline ? 'online' : ''}
-                                        onClick={this.selectFriend.bind(this, friend)}>
+                                    <a href="/" key={'friend_' + n} className={friend.isOnline ? 'online' : ''}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            this.props.selectFriend(friend);
+                                        }}>
                                         <p>
                                             {
                                                 friend.name

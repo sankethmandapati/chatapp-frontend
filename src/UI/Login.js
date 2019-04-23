@@ -48,7 +48,7 @@ export default class Login extends Component {
 			return (
                 <section className="login__register">
 					<div className="backgorund-animation">
-						<img className="login__register--leftanime" src={require("../assets/left_conversation.png")} />
+						<img alt="chat_cartoon" className="login__register--leftanime" src={require("../assets/left_conversation.png")} />
 					</div>
 					<form onSubmit={this.login} autoComplete="on">
 						<div className="login__register--leftconversation">
@@ -59,7 +59,7 @@ export default class Login extends Component {
 						<span className="login__register--leftconversation">Not registered? <Link to="/register">Create an account</Link></span>
 					</form>
 					<div className="backgorund-animation">
-						<img className="login__register--rightanime" src={require("../assets/right_conversation.png")} />
+						<img alt="chat_cartoon" className="login__register--rightanime" src={require("../assets/right_conversation.png")} />
 					</div>
 				</section>
 			);

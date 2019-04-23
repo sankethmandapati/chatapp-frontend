@@ -18,7 +18,7 @@ export default class Chat extends Component {
         socket.listenForNewMessages(this.newMessageListener);
     }
     componentWillReceiveProps(nextProps) {
-        if(this.props.selectedFriend._id != nextProps.selectedFriend._id) {
+        if(this.props.selectedFriend._id !== nextProps.selectedFriend._id) {
             this.setState({messages: [], message: ''});
             this.getChatHistory(nextProps.selectedFriend._id);
         }
@@ -29,13 +29,7 @@ export default class Chat extends Component {
                 myId: socket.userDetails.userId,
                 friendId
             });
-            const sortedChat = chatHistory.sort((msg1, msg2) => {
-                const time1 = new Date(msg1.sentAt).getTime();
-                const time2 = new Date(msg2.sentAt).getTime();
-                const diff = (time1 - time2);
-                return diff;
-            });
-            this.setState({messages: sortedChat});
+            this.setState({messages: [...chatHistory]});
         } catch(err) {
             console.log("error: ", err);
             alert("There was some problem in fetching chat history");
