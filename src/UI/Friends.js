@@ -1,20 +1,18 @@
 import React, {Component} from 'react';
 import socket from '../utils/socket';
-import auth from '../utils/auth';
-import {Redirect} from 'react-router-dom';
+import "../styles/Chat.scss";
 
 export default class Friends extends Component {
     constructor(props) {
         super(props);
         this.state = {
             friends : [],
-            friendSearch: '',
-            isLoggedIn: true
+            friendSearch: ''
         };
         this.friends = [];
         this.friendsChangeListener = this.friendsChangeListener.bind(this);
         this.searchFriend = this.searchFriend.bind(this);
-        this.logout = this.logout.bind(this);
+        // this.selectFriend = this.selectFriend.bind(this);
     }
     async componentWillMount() {
         socket.friendsChangeListener(this.friendsChangeListener);
@@ -27,16 +25,6 @@ export default class Friends extends Component {
         this.friends = friends;
         this.setState({friends});
     }
-    async logout(e) {
-        try {
-            e.preventDefault();
-            await auth.logout();
-            this.setState({isLoggedIn: false});
-        } catch(err) {
-            console.log("error: ", err);
-            alert("There was some problem while trying to logout");
-        }
-    }
     searchFriend(e) {
         e.preventDefault();
         this.setState({friendSearch: e.target.value});
@@ -47,29 +35,21 @@ export default class Friends extends Component {
         this.setState({friends});
     }
     render() {
-        if(this.state.isLoggedIn) {
-            return (
-                <div className="friends">
-                    <section className="statusBar">
-                        <p>
-                            {
-                                socket.userDetails.userName
-                            }
-                        </p>
-                        <a href="/login" onClick={this.logout}>Logout</a>
-                    </section>
-                    <section className="friends__searchbar">
+        return (
+            <div className="friends">
+                <section className="friends__desktop">
+                    <div className="friends__desktop--searchbar">
                         <input type="text" value={this.state.friendSearch} onChange={this.searchFriend} placeholder="Search or start new chat" />
-                    </section>
-                    <section className="friends__list">
+                    </div>
+                    <div className="friends__desktop--friendslist">
                         {
                             this.state.friends.map((friend, n) => {
                                 return (
                                     <a href="/" key={'friend_' + n} className={friend.isOnline ? 'online' : ''}
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            this.props.selectFriend(friend);
-                                        }}>
+                                            this.props.selectFriend(friend)}
+                                        }>
                                         <p>
                                             {
                                                 friend.name
@@ -79,11 +59,35 @@ export default class Friends extends Component {
                                 );
                             })
                         }
-                    </section>
-                </div>
-            );
-        } else {
-            return <Redirect to='/login' />;
-        }
+                    </div>
+                </section>
+                {
+                    this.props.showFriendsListModal ? (
+                        <section className="friends__mobile">
+                            <i onClick={this.props.toggleModal} className="fa fa-times"></i>
+                            <div className="friends__mobile--friendslist">
+                                {
+                                    this.state.friends.map((friend, n) => {
+                                        return (
+                                            <a href="/" key={'friend_' + n} className={friend.isOnline ? 'online' : ''}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    this.props.selectFriend(friend)}
+                                                }>
+                                                <p>
+                                                    {
+                                                        friend.name
+                                                    }
+                                                </p>
+                                            </a>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </section>
+                        ) : null
+                }
+            </div>
+        );
     }
 }

@@ -30,6 +30,7 @@ class Socket {
             userId: '',
             userName: ''
         };
+        this.isConnected = false;
         this.socketInstance.close();
     }
     async setUserDetails(userDetails) {

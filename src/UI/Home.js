@@ -1,30 +1,35 @@
 import React, {Component} from 'react';
 import Chat from './Chat';
 import Friends from './Friends';
+import "../styles/Chat.scss";
+import TopNav from './TopNav';
 
 export default class ChatRooms extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedFriend: {}
+            selectedFriend: {},
+            showFriendsListModal: false
         }
         this.chatRef = React.createRef();
         this.selectFriend = this.selectFriend.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
     componentWillMount() {}
     selectFriend(friend) {
-        this.setState({selectedFriend: {...friend}}, () => {
-            this.forceUpdate();
-        });
+        this.setState({selectedFriend: {...friend}, showFriendsListModal: !this.state.showFriendsListModal});
+    }
+    toggleModal() {
+        console.log("toggleModal called: ", this.state.showFriendsListModal);
+        this.setState({showFriendsListModal: !this.state.showFriendsListModal});
     }
 
     render() {
         return (
-            <div style={{display: 'flex', flexDirection: 'row', height: '100%'}}>
-                <div style={{flex: 1, height: '100%'}}>
-                    <Friends selectedFriend={this.state.selectedFriend} selectFriend={this.selectFriend}></Friends>
-                </div>
-                <div style={{flex: 3, height: '100%'}}>
+            <div className="home">
+                <TopNav toggleModal={this.toggleModal} selectedFriend={this.state.selectedFriend}></TopNav>
+                <div className="main">
+                    <Friends toggleModal={this.toggleModal} showFriendsListModal={this.state.showFriendsListModal} selectedFriend={this.state.selectedFriend} selectFriend={this.selectFriend}></Friends>
                     <Chat selectedFriend={this.state.selectedFriend}></Chat>
                 </div>
             </div>

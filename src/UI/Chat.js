@@ -29,7 +29,9 @@ export default class Chat extends Component {
                 myId: socket.userDetails.userId,
                 friendId
             });
-            this.setState({messages: [...chatHistory]});
+            await this.setState({messages: [...chatHistory]});
+            const conversationWindow = document.getElementsByClassName("main__chatwindow--conversation")[0];
+            conversationWindow.scrollTo(0,conversationWindow.scrollHeight);
         } catch(err) {
             console.log("error: ", err);
             alert("There was some problem in fetching chat history");
@@ -54,32 +56,37 @@ export default class Chat extends Component {
     render() {
         const chatArray = [...this.state.messages];
         return (
-            <div className="chat__window">
-                <section className="statusBar">
-                    <p>
-                        {
-                            this.props.selectedFriend.name
-                        }
-                    </p>
+            <div className="main__chatwindow">
+                <section className="main__chatwindow--conversation">
+                    {
+                        (this.props.selectedFriend && this.props.selectedFriend._id)  ? (
+                            <ul>
+                                {
+                                    chatArray.reverse().map((message, n) => {
+                                        return (
+                                            <li key={'message_' + n} className={(socket.userDetails.userId === message.from) ? "my-message" : "friend-message"}>
+                                                {
+                                                    message.msg
+                                                }
+                                            </li>
+                                        );
+                                    })
+                                }
+                            </ul>
+                        ) : (
+                            <div style={{height: '100%', width: '100%'}}>
+                                <p>
+                                    Select a friend to chat
+                                </p>
+                            </div>
+                        )
+                    }
                 </section>
-                <section className="chat__window--conversation">
-                    <ul>
-                        {
-                            chatArray.reverse().map((message, n) => {
-                                return (
-                                    <li key={'message_' + n} className={(socket.userDetails.userId === message.from) ? "my-message" : "friend-message"}>
-                                        {
-                                            message.msg
-                                        }
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
-                </section>
-                <form className="chatform" onSubmit={this.sendMessage}>
-                    <input type="text" onChange={(e) => this.setState({message: e.target.value})} value={this.state.message} />
-                    <button type="submit">Send</button>
+                <form className="main__chatwindow--chatform" onSubmit={this.sendMessage}>
+                    <input type="text" placeholder="Type a message" onChange={(e) => this.setState({message: e.target.value})} value={this.state.message} />
+                    <button type="submit">
+                        <i className="fa fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
         );

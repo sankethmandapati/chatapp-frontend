@@ -59,7 +59,7 @@
     button {
         position: relative;
         left: 160px;
-        background: #dcf8c6;
+        background: #d8e3ff;
         border-bottom-right-radius: 10%;
         border-top-left-radius: 10%;
         border-bottom-left-radius: 10%;
@@ -83,7 +83,7 @@
             width: 0;
             height: 0;
             border: 20px solid transparent;
-            border-left-color: #dcf8c6;
+            border-left-color: #d8e3ff;
             border-right: 0;
             border-top: 0;
             margin-top: 0;
@@ -117,9 +117,15 @@
         }
     }
     .login__register--leftanime {
-        margin-right: 20%;
+        margin-right: 0;
+        @include breakpoint($sm) {
+            margin-right: 20%;
+        }
     }
     .login__register--rightanime {
-        margin-left: 20%;
+        margin-left: 0;
+        @include breakpoint($sm) {
+            margin-left: 20%;
+        }
     }
 }
