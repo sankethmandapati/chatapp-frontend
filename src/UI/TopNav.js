@@ -42,6 +42,7 @@ export default class TopNav extends Component {
                             }
                         </span>
                         <i className="fa fa-users" onClick={this.props.toggleModal}></i>
+                        <i className="fa fa-sign-out" onClick={this.logout}></i>
                     </section>
                 </div>
             );

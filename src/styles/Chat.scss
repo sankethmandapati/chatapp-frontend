@@ -48,6 +48,9 @@
             .fa-users {
                 margin-left: auto;
             }
+            .fa-sign-out {
+                margin-right: 0;
+            }
             a {
                 margin-right: 0;
                 margin-left: auto;
@@ -128,6 +131,23 @@
                 left: 0;
                 right: 0;
                 background-color: rgba(0, 0, 0, 0.6);
+                .searchbar {
+                    padding: 0.5em 1em; 
+                    background-color: #F8F8F8;
+                    margin-top: 0;
+                    margin-bottom: 0.5em;
+                    input {
+                        height: 35px;
+                        width: 100%;
+                        border-width: 0;
+                        border-radius: 17.5px;
+                        padding: 0 1.25em;
+                        font-size: 14px;
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
                 .fa-times {
                     font-size: 32px;
                     font-weight: 200;
@@ -141,11 +161,14 @@
                     width: calc(100% - 2em);
                     height: calc(100% - 6em);
                     background-color: #FFF;
-                    padding: 1.2em 0.5em;
+                    padding-bottom: 1.2em;
+                    padding-top: 0;
                     a {
-                        width: '100%';
+                        width: 100%;
                         padding-top: 0.5em;
                         padding-bottom: 0.5em;
+                        margin-left: 0.5em;
+                        margin-right: 0.5em;
                         border-bottom: 1px solid #e9ebeb;
                         background-color: #FFF;
                         padding: 0 0.8em;
@@ -237,15 +260,28 @@
                 margin-top: auto;
                 display: flex;
                 flex-direction: row;
-                input { 
-                    border: 1px solid #d8e3ff; 
-                    padding: 15px; 
+                .messageinput {
+                    border: 2px solid #E8F0FE; 
+                    padding: 0.7em; 
                     flex: 9;
                     border-radius: 10px;
+                    background-color: #E8F0FE;
+                    overflow-y: auto;
+                    align-self: center;
                     &:focus {
                         outline: none;
                     }
+                    max-height: 100px;
                 }
+                // input { 
+                //     border: 1px solid #d8e3ff; 
+                //     padding: 15px; 
+                //     flex: 9;
+                //     border-radius: 10px;
+                //     &:focus {
+                //         outline: none;
+                //     }
+                // }
                 button {
                     border: none; 
                     padding: 10px;

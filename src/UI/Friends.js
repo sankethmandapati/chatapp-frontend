@@ -65,7 +65,11 @@ export default class Friends extends Component {
                     this.props.showFriendsListModal ? (
                         <section className="friends__mobile">
                             <i onClick={this.props.toggleModal} className="fa fa-times"></i>
+
                             <div className="friends__mobile--friendslist">
+                                <div className="searchbar">
+                                    <input type="text" value={this.state.friendSearch} onChange={this.searchFriend} placeholder="Search or start new chat" />
+                                </div>
                                 {
                                     this.state.friends.map((friend, n) => {
                                         return (
