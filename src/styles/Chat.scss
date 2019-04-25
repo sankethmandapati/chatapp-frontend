@@ -118,6 +118,11 @@
             }
             &__mobile {
                 position: absolute;
+                display: block;
+                @include breakpoint($sm) {
+                    display: none;
+                    position: relative;
+                }
                 top: 0;
                 bottom: 0;
                 left: 0;
