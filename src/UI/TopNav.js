@@ -35,7 +35,7 @@ export default class TopNav extends Component {
                         <a href="/login" onClick={this.logout}>Logout</a>
                     </section>
                     <section className="home__topnav--right">
-                        <i className="fa fa-bars"></i>
+                        {/* <i className="fa fa-bars"></i> */}
                         <span>
                             {
                                 this.props.selectedFriend.name

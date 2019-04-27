@@ -20,7 +20,6 @@ export default class ChatRooms extends Component {
         this.setState({selectedFriend: {...friend}, showFriendsListModal: !this.state.showFriendsListModal});
     }
     toggleModal() {
-        console.log("toggleModal called: ", this.state.showFriendsListModal);
         this.setState({showFriendsListModal: !this.state.showFriendsListModal});
     }
 
