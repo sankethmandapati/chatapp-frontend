@@ -23,7 +23,7 @@ export default class Friends extends Component {
     async friendsChangeListener() {
         const friends = await socket.emit('get-friends', {querry: {}, selfId: socket.userDetails.userId});
         if(!this.props.selectedFriend._id && (friends.length > 0))
-        this.props.selectFriend(friends[0]);
+        // this.props.selectFriend(friends[0]);
         this.friends = friends;
         this.setState({friends});
     }

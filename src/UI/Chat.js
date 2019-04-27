@@ -108,27 +108,31 @@ export default class Chat extends Component {
                         )
                     }
                 </section>
-                <div className="main__chatwindow--chatform">
-                    {/* <div className="placeholder" invisible={this.state.placeHolderInvisible.toString()}>Type a message</div> */}
-                    <div className="messageinput" 
-                        contentEditable="true" 
-                        role="textbox" 
-                        spellCheck="true"
-                        onKeyDown={(e) => {
-                            const code = e.keyCode, shift = e.shiftKey;
-                            if((code === 13) && !shift && !this.isMobileDevice) {
-                                e.preventDefault();
-                                this.sendMessage();
-                            }
-                        }}
-                        data-placeholder="Type a message"
-                        ref={this.messageRef}>
-                    </div>
-                    {/* <input type="text" placeholder="Type a message" onChange={(e) => this.setState({message: e.target.value})} value={this.state.message} /> */}
-                    <button onClick={this.sendMessage}>
-                        <i className="fa fa-paper-plane"></i>
-                    </button>
-                </div>
+                {
+                    this.props.selectedFriend._id ? (
+                        <div className="main__chatwindow--chatform">
+                            {/* <div className="placeholder" invisible={this.state.placeHolderInvisible.toString()}>Type a message</div> */}
+                            <div className="messageinput" 
+                                contentEditable="true" 
+                                role="textbox" 
+                                spellCheck="true"
+                                onKeyDown={(e) => {
+                                    const code = e.keyCode, shift = e.shiftKey;
+                                    if((code === 13) && !shift && !this.isMobileDevice) {
+                                        e.preventDefault();
+                                        this.sendMessage();
+                                    }
+                                }}
+                                data-placeholder="Type a message"
+                                ref={this.messageRef}>
+                            </div>
+                            {/* <input type="text" placeholder="Type a message" onChange={(e) => this.setState({message: e.target.value})} value={this.state.message} /> */}
+                            <button onClick={this.sendMessage}>
+                                <i className="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    ) : null
+                }
             </div>
         );
     }
