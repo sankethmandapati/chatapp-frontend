@@ -62,76 +62,29 @@
         display: flex; 
         flex-direction: row;
         overflow-y: hidden;
-        .friends {
-            &__desktop {
-                flex: 1;
-                display: none;
-                border-right: 1px solid #DBDBDB;
-                @include breakpoint($sm) {
-                    display: block;
-                    width: 100%;
-                }
-                &--searchbar {
-                    padding: 0.4em 1em; 
-                    background-color: #F8F8F8;
-                    input {
-                        height: 35px;
-                        width: 90%; 
-                        border-width: 0;
-                        border-radius: 17.5px;
-                        padding: 0 1.25em;
-                        font-size: 14px;
-                    }
-                }
-                &--friendslist {
-                    a {
-                        width: '100%';
-                        padding-top: 0.5em;
-                        padding-bottom: 0.5em;
-                        border-bottom: 1px solid #e9ebeb;
-                        background-color: #FFF;
-                        padding: 0 0.8em;
-                        display: flex;
-                        flex-direction: row;
-                        text-decoration: none;
-                        overflow-y: auto;
-                        color: #000;
-                        &:hover {
-                            background-color: #f4f5f5;
-                        }
-                        &:target {
-                            background-color: #E9EBEB;
-                        }
-                        &::before {
-                            content: '';
-                            background-color: red;
-                            width: 10px;
-                            height: 10px;
-                            margin-right: 1em;
-                            border-radius: 50%;
-                            align-self: center;
-                        }
-                    }
-                    .online {
-                        &::before {
-                        background-color: green;
-                        }
-                    }
-                }
-            }
-            &__mobile {
+        .friends__mobile {
                 position: absolute;
-                display: block;
+                visibility: visible;
                 z-index: 2;
-                @include breakpoint($sm) {
-                    display: none;
-                    position: relative;
-                }
+                background-color: rgba(0, 0, 0, 0.6);
                 top: 0;
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background-color: rgba(0, 0, 0, 0.6);
+                &[aria-hidden=true] {
+                    visibility: hidden;
+                }
+                @include breakpoint($sm) {
+                    position: relative;
+                    background-color: #FFF;
+                    flex: 1;
+                    border-right: 1px solid #DBDBDB;
+                    overflow-y: auto;
+                    &[aria-hidden] {
+                        // visibility: hidden;
+                        visibility: visible;
+                    }
+                }
                 .searchbar {
                     padding: 0.5em 1em; 
                     background-color: #F8F8F8;
@@ -156,15 +109,26 @@
                     position: absolute;
                     right: 0.4em;
                     top: 0.4em;
+                    @include breakpoint($sm) {
+                        display: none;
+                    }
                 }
                 &--friendslist {
                     margin: 3em 1em;
                     position: relative;
                     width: calc(100% - 2em);
                     height: calc(100% - 6em);
-                    background-color: #FFF;
                     padding-bottom: 1.2em;
                     padding-top: 0;
+                    overflow-y: auto;
+                    // height: 100%;
+                    @include breakpoint($sm) {
+                        margin: 0;
+                        width: 100%;
+                        padding: 0;
+                        overflow-y: initial;
+                    }
+                    background-color: #FFF;
                     a {
                         width: 100%;
                         padding-top: 0.5em;
@@ -199,7 +163,6 @@
                         }
                     }
                 }
-            }
         }
         &__chatwindow {
             flex: 3; 
@@ -252,7 +215,7 @@
                         max-width: 80%;
                         .time-stamp {
                             color: #A0A0A0;
-                            font-size: 8px;
+                            font-size: 10px;
                             margin-left: 0.6em;
                             position: relative;
                             bottom: -0.6em;

@@ -91,7 +91,7 @@ export default class Chat extends Component {
                                                     message.msg
                                                 }</span>
                                                 <span className="time-stamp">{
-                                                    moment(message.sentAt).format("H:mm a")
+                                                    moment(message.sentAt).format("h:mm a")
                                                 }</span>
                                             </li>
                                         );
