@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Chat from './Chat';
 import Friends from './Friends';
-import "../styles/Chat.scss";
+import "../../styles/Chat.scss";
 import TopNav from './TopNav';
 
 export default class ChatRooms extends Component {

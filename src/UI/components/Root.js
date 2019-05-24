@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import Auth from '../utils/auth';
-import Login from './containers/Login';
-import '../styles/App.scss';
-import Register from './containers/Register';
+import Auth from '../../utils/auth';
+import Login from '../containers/Login';
+import '../../styles/App.scss';
+import Register from '../containers/Register';
 import Home from './Home';
 import {Provider} from 'react-redux';
 

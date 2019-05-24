@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import socket from '../utils/socket';
-import "../styles/Chat.scss";
+import socket from '../../utils/socket';
+import "../../styles/Chat.scss";
 
 export default class Friends extends Component {
     constructor(props) {

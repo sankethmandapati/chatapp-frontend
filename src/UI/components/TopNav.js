@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import socket from '../utils/socket';
-import auth from '../utils/auth';
+import socket from '../../utils/socket';
+import auth from '../../utils/auth';
 import {Redirect} from 'react-router-dom';
-import "../styles/TopNav.scss";
+import "../../styles/TopNav.scss";
 
 export default class TopNav extends Component {
     constructor(props) {
