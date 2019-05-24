@@ -44,7 +44,7 @@ class Auth {
 		try {
 			const loginResponse = await this.callApi('login', credentials);
 			await this.setUserDetailsToCookies(loginResponse);
-			return loginResponse.token;
+			return loginResponse;
 		} catch(err) {
 			console.log("error in logging in: ", err);
 			throw new Error("There was some issue while trying to login");
