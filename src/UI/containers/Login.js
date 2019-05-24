@@ -5,7 +5,7 @@ import AuthContainer from './AuthContainer';
 
 const mapStateToProps = (state) => {
     return {
-        isLoggedIn: state.auth.isLoggedIn,
+        isLoggedin: state.auth.isLoggedin,
         ChildComponent: Login
     };
 };

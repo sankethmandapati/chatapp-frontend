@@ -4,7 +4,7 @@ import * as authActions from '../../utils/redux/actions/auth';
 import AuthContainer from './AuthContainer';
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: state.auth.isLoggedIn,
+    isLoggedin: state.auth.isLoggedin,
     ChildComponent: Register
 });
 

@@ -14,8 +14,8 @@ class AuthContainer extends Component {
         this.props.callApi(email, password, name);
     }
     render() {
-        const { ChildComponent, isLoggedIn } = this.props;
-        if(isLoggedIn) {
+        const { ChildComponent, isLoggedin } = this.props;
+        if(isLoggedin) {
             return (
                 <Redirect to="/" /> 
             );
