@@ -1,5 +1,6 @@
 import auth from './reducers/auth';
 import chat from './reducers/chat';
+import friends from './reducers/friends';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
@@ -8,7 +9,8 @@ import Auth from '../auth';
 export default () => {
     const reducer = combineReducers({
         auth,
-        chat
+        chat,
+        friends
     });
     const middlewares = [thunk];
     middlewares.push(createLogger);
@@ -22,6 +24,10 @@ export default () => {
             messages: [],
             isLoading: false,
             erorrMessage: null
+        },
+        friends: {
+            friendsList: [],
+            showFriendsListModal: true
         }
     };
     const store = createStore(reducer, initialState, applyMiddleware(...middlewares));
