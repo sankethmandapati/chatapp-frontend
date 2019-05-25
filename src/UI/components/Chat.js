@@ -18,7 +18,7 @@ export default class Chat extends Component {
     }
     componentWillMount() {
         this.socket = socket.getInstance();
-        socket.listenForNewMessages(this.newMessageListener);
+        socket.messageListener(this.newMessageListener);
     }
     componentWillReceiveProps(nextProps) {
         if(this.props.selectedFriend._id !== nextProps.selectedFriend._id) {
@@ -53,9 +53,12 @@ export default class Chat extends Component {
         this.setState({message: ""});
     }
     newMessageListener(msgObj) {
-        const messages = [...this.state.messages];
-        messages.push(msgObj);
-        this.setState({messages}, this.scrollToLatestMessage);
+        if(msgObj) {
+            console.log("in chat component.. new message: ", msgObj);
+            const messages = [...this.state.messages];
+            messages.push(msgObj);
+            this.setState({messages}, this.scrollToLatestMessage);
+        }
     }
     render() {
         return (

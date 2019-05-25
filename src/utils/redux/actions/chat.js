@@ -21,3 +21,8 @@ export const getChatHistory = (myId, friendId) => async (dispatch) => {
         });
     }
 }
+
+export const newMessage = (message) => ({
+    type: "NEW_MESSAGE",
+    message
+});

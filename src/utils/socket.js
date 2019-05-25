@@ -4,7 +4,7 @@ import config from './config';
 class Socket {
     constructor() {
         this.socketInstance = null;
-        this.messageObservers = [];
+        // this.messageObservers = [];
         this.userDetails = {
             accessToken: '',
             userId: '',
@@ -37,7 +37,7 @@ class Socket {
         this.userDetails = userDetails;
         if(!this.isConnected) {
             this.connect();
-            this.messageListener();
+            // this.messageListener();
         } else {
             console.log("Duplicate connection");
         }
@@ -46,26 +46,28 @@ class Socket {
     getInstance() {
         return this.socketInstance;
     }
-    messageListener() {
+    messageListener(fn) {
         console.log("listening for new messages..");
         this.socketInstance.on("message", async (msg) => {
-            this.messageObservers.forEach((fn) => fn(msg));
+            console.log("new message!: ", msg);
+            fn(msg);
+            // this.messageObservers.forEach((fn) => fn(msg));
         });
     }
     friendsChangeListener(fn) {
         this.socketInstance.on('users-update', fn);
     }
-    listenForNewMessages(fn) {
-        if(!this.messageObservers.includes(fn)) {
-            this.messageObservers.push(fn);
-        }
-    }
-    unlistennewMessages(fn) {
-        const listenerIndex = this.messageObservers.indexOf(fn);
-        if(listenerIndex > -1) {
-            this.messageObservers.splice(listenerIndex, 1);
-        }
-    }
+    // listenForNewMessages(fn) {
+    //     if(!this.messageObservers.includes(fn)) {
+    //         this.messageObservers.push(fn);
+    //     }
+    // }
+    // unlistennewMessages(fn) {
+    //     const listenerIndex = this.messageObservers.indexOf(fn);
+    //     if(listenerIndex > -1) {
+    //         this.messageObservers.splice(listenerIndex, 1);
+    //     }
+    // }
     sendMessage(msg) {
         this.socketInstance.send(msg);
     }

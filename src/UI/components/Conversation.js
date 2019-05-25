@@ -8,6 +8,7 @@ export default ({chatArray}) => {
         <ul>
             {
                 chatArray.reduce((messages, message, n) => {
+                    // console.log("msg:: ", message);
                     const dateStamp = moment(message.sentAt).format("D MMMM YYYY");
                     if(dateStamp !== previousDay) {
                         messages.push(<p key={dateStamp}>
