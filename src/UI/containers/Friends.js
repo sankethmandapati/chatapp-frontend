@@ -28,32 +28,28 @@ class FriendsContainer extends Component {
     selectFriend(selectedFriend) {
         const {selectFriend, getChatHistory, myId} = this.props;
         selectFriend(selectedFriend);
-        console.log("calling");
         getChatHistory(selectedFriend._id, myId);
     }
 
     searchFriend(e) {
         e.preventDefault();
-        if(e.target.value) {
-            this.setState({friendSearch: e.target.value.toLowerCase()});
-        }
+        this.setState({friendSearch: e.target.value.toLowerCase()});
     }
 
     render() {
-        let {friendId, friendsList} = this.props;
-        if(this.state.friendSearch) {
-            friendsList = friendsList.filter((friend) => {
-                return friend.name.toLowerCase().includes(this.state.friendSearch);
-            });
-        }
+        let {friendsList, toggleModal, showFriendsListModal} = this.props;
+        friendsList = friendsList.filter((friend) => {
+            return friend.name.toLowerCase().includes(this.state.friendSearch);
+        });
 
         return (
             <Friends 
-                selectThsiFriend={this.selectFriend} 
-                friendId={friendId} 
+                showFriendsListModal={showFriendsListModal}
                 friendsList={friendsList}
+                selectThsiFriend={this.selectFriend} 
                 searchFriend={this.searchFriend}
-                {...this.props} />
+                toggleModal={toggleModal}
+            />
         );
     }
 }

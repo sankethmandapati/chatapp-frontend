@@ -6,9 +6,6 @@ export const callApi = (email, password, name) => async (dispatch) => {
             type: "LOGIN_REGISTER_REQUEST"
         });
         const requestType = name ? "register" : "login";
-        console.log("email: ", email);
-        console.log("password: ", password);
-        console.log("name: ", name);
         const response = await auth[requestType]({email, password, name});
         // console.log("response: ", response);
         return dispatch({
@@ -26,7 +23,7 @@ export const callApi = (email, password, name) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        auth.logout();
+        await auth.logout();
         dispatch({
             type: "LOGOUT"
         });

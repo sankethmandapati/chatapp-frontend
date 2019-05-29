@@ -54,7 +54,7 @@ class Auth {
 		try {
 			const registerResponse = await this.callApi('register', data);
 			await this.setUserDetailsToCookies(registerResponse);
-			return registerResponse.accessToken;
+			return registerResponse;
 		} catch(err) {
 			console.log("Error occured while registering: ", err);
 			throw err;
@@ -64,14 +64,14 @@ class Auth {
 		await cookies.set('accessToken', userDetails.accessToken, {path: '/'});
 		await cookies.set('userId', userDetails.userId, {path: '/'});
 		await cookies.set('userName', userDetails.userName, {path: '/'});
-		socket.setUserDetails(userDetails);
+		socket.connect(userDetails.accessToken);
 	}
 	authenticate() {
 		const accessToken = cookies.get('accessToken');
 		const userId = cookies.get('userId');
 		const userName = cookies.get('userName');
 		if(accessToken) {
-			socket.setUserDetails({accessToken,userId,userName});
+			socket.connect(accessToken);
 			return {
 				isLoggedin: true,
 				userDetails: {
