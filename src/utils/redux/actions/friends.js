@@ -1,8 +1,8 @@
 import socket from '../../socket';
 
-export const selectFriend = (id) => ({
+export const selectFriend = (selectedFriend) => ({
     type: "SELECT_FRIEND",
-    friendId: id
+    selectedFriend
 });
 
 export const getFriendsList = (selfId) => async (dispatch) => {

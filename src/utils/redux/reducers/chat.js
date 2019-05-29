@@ -7,7 +7,7 @@ const messagesReducer = (state = [], action) => {
             ];
         case "CHAT_HISTORY_SUCCESS":
             return [
-                ...action.messages
+                ...action.response
             ];
         default:
             return state;

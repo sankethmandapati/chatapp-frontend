@@ -11,19 +11,20 @@ export default (state = {}, action) => {
                 ...state,
                 isLoading: false,
                 isLoggedin: true,
-                userDetials: action.response
+                userDetails: action.response
             };
         case "LOGIN_REGISTER_FAILURE":
             return {
                 ...state,
                 isLoading: false,
+                isLoggedin: false,
                 errorMessage: action.errorMessage
             };
         case "LOGOUT":
             return {
                 ...state,
                 isLoggedin: false,
-                userDetials: {}
+                userDetails: {}
             };
         default:
             return state;

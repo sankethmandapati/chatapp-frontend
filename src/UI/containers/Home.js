@@ -6,8 +6,8 @@ import * as chatActions from '../../utils/redux/actions/chat';
 import * as friendsActions from '../../utils/redux/actions/friends';
 
 const mapStateToProps = (state) => ({
-    selfId: state.auth.userId,
-    friendId: state.friends.selectedFriend
+    selfId: state.auth.userDetails.userId,
+    friendId: state.friends.selectedFriend._id
 });
 
 const mapActionsToProps = {
@@ -21,11 +21,14 @@ class HomeContainer extends Component {
         this.updateFriendsList = this.updateFriendsList.bind(this);
     }
     componentWillMount() {
-        socket.messageListener(this.props.newMessage);
+        socket.messageListener((msg) => {
+            this.props.newMessage(msg);
+        });
         socket.friendsChangeListener(this.updateFriendsList);
         this.updateFriendsList();
     }
     updateFriendsList() {
+        console.log("this.props: ", this.props);
         this.props.getFriendsList(this.props.selfId);
     }
     render() {
@@ -35,6 +38,6 @@ class HomeContainer extends Component {
     }
 }
 
-HomeContainer = connect(null, mapActionsToProps)(HomeContainer);
+HomeContainer = connect(mapStateToProps, mapActionsToProps)(HomeContainer);
 
 export default HomeContainer;

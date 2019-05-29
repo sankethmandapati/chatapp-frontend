@@ -14,11 +14,12 @@ export default () => {
     });
     const middlewares = [thunk];
     middlewares.push(createLogger);
-    const isLoggedin = Auth.authenticate();
+    const {isLoggedin, userDetails} = Auth.authenticate();
+    console.log("userDetails: ", userDetails);
     const initialState = {
         auth: {
             isLoggedin,
-            userDetails: {}
+            userDetails
         },
         chat: {
             messages: [],
@@ -27,6 +28,7 @@ export default () => {
         },
         friends: {
             friendsList: [],
+            selectedFriend: {},
             showFriendsListModal: true
         }
     };

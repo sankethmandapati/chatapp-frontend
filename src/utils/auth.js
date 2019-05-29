@@ -72,9 +72,19 @@ class Auth {
 		const userName = cookies.get('userName');
 		if(accessToken) {
 			socket.setUserDetails({accessToken,userId,userName});
-			return true;
+			return {
+				isLoggedin: true,
+				userDetails: {
+					accessToken,
+					userId,
+					userName
+				}
+			};
 		}
-		return false;
+		return {
+			isLoggedin: false,
+			userDetails: {}
+		};
 	}
 }
 

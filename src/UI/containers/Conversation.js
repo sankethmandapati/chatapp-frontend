@@ -1,11 +1,24 @@
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Conversation from '../components/Conversation';
-import * as chatActions from '../../utils/redux/actions/chat';
+import {scrollToLatestMessage} from '../../utils/redux/actions/chat';
 
 const mapStateToProps = (state) => ({
-    conversation: state.chat.messages
+    conversation: state.chat.messages,
+    friendId: state.friends.selectedFriend._id
 });
 
-const ConversationContainer = connect(mapStateToProps)(Conversation);
+class ConversationContainer extends Component {
+    componentDidUpdate() {
+        this.props.scrollToLatestMessage();
+    }
+    render() {
+        return (
+            <Conversation {...this.props} />
+        );
+    }
+}
+
+ConversationContainer = connect(mapStateToProps, {scrollToLatestMessage})(ConversationContainer);
 
 export default ConversationContainer;

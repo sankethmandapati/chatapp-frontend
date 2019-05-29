@@ -3,13 +3,21 @@ import userAgent from '../../utils/userAgent';
 
 let isMobileDevice = userAgent();
 
-export default ({sendMessage}) => {
+export default ({newMessage, myId, friendId}) => {
+
+    if(!friendId)
+        return null;
 
     const inputRef = React.createRef();
     const sendMsg = () => {
         const text = inputRef.current.innerText.trim();
         if(text) {
-            sendMessage(text);
+            const messageObj = {
+                msg: text,
+                from: myId,
+                to: friendId
+            };
+            newMessage(messageObj, true);
             inputRef.current.innerText = "";
         }
     }

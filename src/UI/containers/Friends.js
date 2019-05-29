@@ -5,9 +5,10 @@ import * as friendsActions from '../../utils/redux/actions/friends';
 import * as chatActions from '../../utils/redux/actions/chat';
 
 const mapStateToProps = (state) => ({
-    myId: state.auth.userId,
-    friendId: state.friends.friendId,
-    friendsList: state.friends.friends
+    myId: state.auth.userDetails.userId,
+    friendId: state.friends.selectedFriend._id,
+    friendsList: state.friends.friendsList,
+    showFriendsListModal: state.friends.showFriendsListModal
 });
 
 const mapActionsToProps = {
@@ -16,21 +17,47 @@ const mapActionsToProps = {
 };
 
 class FriendsContainer extends Component {
-    consttructor(props) {
+    constructor(props) {
         super(props);
+        this.state = {
+            friendSearch: ""
+        };
         this.selectFriend = this.selectFriend.bind(this);
+        this.searchFriend = this.searchFriend.bind(this);
     }
-    selectFriend(id) {
+    selectFriend(selectedFriend) {
         const {selectFriend, getChatHistory, myId} = this.props;
-        selectFriend(id);
-        getChatHistory(id, myId);
+        selectFriend(selectedFriend);
+        console.log("calling");
+        getChatHistory(selectedFriend._id, myId);
     }
+
+    searchFriend(e) {
+        e.preventDefault();
+        if(e.target.value) {
+            this.setState({friendSearch: e.target.value.toLowerCase()});
+        }
+    }
+
     render() {
-        const {friendId, friendsList} = this.props;
+        let {friendId, friendsList} = this.props;
+        if(this.state.friendSearch) {
+            friendsList = friendsList.filter((friend) => {
+                return friend.name.toLowerCase().includes(this.state.friendSearch);
+            });
+        }
+
         return (
-            <Friends selectFriend={selectFriend} friendId={friendId} friendsList={friendsList} />
+            <Friends 
+                selectThsiFriend={this.selectFriend} 
+                friendId={friendId} 
+                friendsList={friendsList}
+                searchFriend={this.searchFriend}
+                {...this.props} />
         );
     }
 }
 
 FriendsContainer = connect(mapStateToProps, mapActionsToProps)(FriendsContainer);
+
+export default FriendsContainer;
