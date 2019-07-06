@@ -1,10 +1,13 @@
 const messagesReducer = (state = [], action) => {
     switch(action.type) {
         case "NEW_MESSAGE":
-            return [
-                ...state,
-                action.message
-            ];
+            if(action.selectedConversationId === action.message.conversationId) {
+                return [
+                    ...state,
+                    action.message
+                ];
+            } 
+            return state;
         case "CHAT_HISTORY_SUCCESS":
             return [
                 ...action.response
@@ -24,6 +27,7 @@ export default (state = {}, action) => {
         case "CHAT_HISTORY_REQUEST":
             return {
                 ...state,
+                messages: [],
                 isLoading: true
             };
         case "CHAT_HISTORY_SUCCESS":
