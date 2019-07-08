@@ -24,7 +24,7 @@ const TopNav = ({userName, friendName, toggleModal, logout, isLoggedin}) => {
                         friendName
                     }
                 </span>
-                <i className="fa fa-users" onClick={toggleModal}></i>
+                <i className="fa fa-comments-o" onClick={toggleModal}></i>
                 <i className="fa fa-sign-out" onClick={(e) => {
                     e.preventDefault();
                     logout();

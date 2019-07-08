@@ -22,7 +22,7 @@ class HomeContainer extends Component {
     }
     componentWillMount() {
         socket.messageListener((msg) => {
-            this.props.newMessage(msg);
+            this.props.newMessage(this.props.friendId, msg);
         });
         socket.friendsChangeListener(this.updateFriendsList);
         this.updateFriendsList();

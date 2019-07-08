@@ -47,7 +47,7 @@ class FriendsContainer extends Component {
                 showFriendsListModal={showFriendsListModal}
                 friendsList={friendsList}
                 selectThsiFriend={this.selectFriend} 
-                searchFriend={this.searchFriend}
+                searchFriend={this.props.searchFriend}
                 toggleModal={toggleModal}
             />
         );

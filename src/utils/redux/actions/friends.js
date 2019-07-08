@@ -24,6 +24,28 @@ export const getFriendsList = (selfId) => async (dispatch) => {
     }
 }
 
+export const searchFriend = (searchText) => async (dispatch) => {
+    try {
+        dispatch({
+            type: 'SEARCH_FRIEND_REQUEST'
+        });
+        let response = [];
+        if(searchText) {
+            response = await socket.emit('search-friend', {querryString: searchText});
+        }
+        dispatch({
+            type: 'SEARCH_FRIEND_SUCCESS',
+            response
+        });
+    } catch(err) {
+        console.log("Error in searching friend: ", err);
+        dispatch({
+            type: 'SEARCH_FRIEND_ERROR',
+            errorMessage: "Internal error."
+        });
+    }
+}
+
 export const toggleModal = () => ({
     type: "TOGGLE_MODAL"
 });

@@ -12,7 +12,7 @@ const Friends = ({
         <i onClick={toggleModal} className="fa fa-times"></i>
         <div className="friends__mobile--friendslist">
             <div className="searchbar">
-                <input type="text" onChange={searchFriend} placeholder="Search or start new chat" />
+                <input type="text" onChange={(e) => searchFriend(e.target.value)} placeholder="Search or start new chat" />
             </div>
             {
                 friendsList.map((friend, n) => {

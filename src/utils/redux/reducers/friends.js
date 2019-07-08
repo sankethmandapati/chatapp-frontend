@@ -27,6 +27,23 @@ export default (state = {}, action) => {
                 ...state,
                 showFriendsListModal: !state.showFriendsListModal
             };
+        case "SEARCH_FRIEND_REQUEST":
+            return {
+                ...state,
+                isLoading: false
+            };
+        case "SEARCH_FRIEND_ERROR":
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: action.errorMessage
+            };
+        case "SEARCH_FRIEND_SUCCESS":
+            return {
+                ...state,
+                isLoading: false,
+                friendsList: action.response
+            };
         default:
             return state;
     }
