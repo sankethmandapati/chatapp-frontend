@@ -7,13 +7,10 @@ export const scrollToLatestMessage = () => {
 }
 
 export const getChatHistory = (myId, friendId) => async (dispatch) => {
-    console.log("dispatching");
     try {
         dispatch({
             type: "CHAT_HISTORY_REQUEST",
         });
-        console.log("Here...: ", myId);
-        console.log("There...: ", friendId);
         const response = await socket.emit('get-chat-history', {
             myId,
             friendId

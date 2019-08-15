@@ -1,10 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import socket from '../../utils/socket';
 
 export default ({conversation, friendId}) => {
-    console.log("friendId ", friendId);
-    console.log("conversation ", conversation);
     if(!friendId) {
         return (
             <div style={{height: '100%', width: '100%'}}>
