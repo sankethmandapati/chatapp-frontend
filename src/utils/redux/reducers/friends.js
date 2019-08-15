@@ -20,7 +20,8 @@ export default (state = {}, action) => {
         case "SELECT_FRIEND":
             return {
                 ...state,
-                selectedFriend: action.selectedFriend
+                selectedFriend: action.selectedFriend,
+                showFriendsListModal: false
             };
         case "TOGGLE_MODAL":
             return {
