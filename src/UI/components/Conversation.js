@@ -26,7 +26,7 @@ export default ({conversation, friendId}) => {
                         previousDay = dateStamp;
                     }
                     messages.push(
-                        <li key={'message_' + n} className={(socket.userDetails.userId === message.from) ? "my-message" : "friend-message"}>
+                        <li key={'message_' + n} className={(friendId === message.to) ? "my-message" : "friend-message"}>
                             <span>{
                                 message.msg
                             }</span>
