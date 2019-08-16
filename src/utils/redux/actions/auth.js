@@ -1,10 +1,14 @@
 import auth from "../../auth";
 
-export const register = (email, password, name) => async (dispatch) => {
+export const register = (e) => async (dispatch) => {
     try {
+        e.preventDefault();
         dispatch({
             type: "LOGIN_REGISTER_REQUEST"
         });
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const name = e.target.name.value;
         const response = await auth.register({email, password, name});
         alert("Registered successfully!\nA verification email has been send to your registered mail address, please check");
         return dispatch({
@@ -22,9 +26,12 @@ export const register = (email, password, name) => async (dispatch) => {
 
 export const login = (email, password) => async (dispatch) => {
     try {
+        e.preventDefault();
         dispatch({
             type: "LOGIN_REGISTER_REQUEST"
         });
+        const email = e.target.email.value;
+        const password = e.target.password.value;
         const response = await auth.login({email, password});
         return dispatch({
             type: "LOGIN_SUCCESS",
