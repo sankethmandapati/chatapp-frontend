@@ -16,8 +16,7 @@ export default (state = {}, action) => {
         case "REGISTER_SUCCESS":
             return {
                 ...state,
-                isLoading: false,
-                registeredSuccessfully: true
+                isLoading: false
             };
         case "LOGIN_REGISTER_FAILURE":
             return {

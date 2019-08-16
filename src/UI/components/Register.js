@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import LoginRegister from './LoginRegister';
 import '../../styles/Login.scss';
 
-const Register = ({callApi}) => {
+const Register = ({ register }) => {
 	return (
 		<LoginRegister>
-			<form onSubmit={callApi} autoComplete="on" >
+			<form onSubmit={register} autoComplete="on" >
 				<div className="login__register--leftconversation">
 					<input type="text" name="name" placeholder="Full Name" />
 					<input type="email" name="email" placeholder="Login ID" />

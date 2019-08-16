@@ -1,12 +1,13 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import LoginRegister from './LoginRegister';
 import '../../styles/Login.scss';
 
-const Login = ({callApi}) => {
+const Login = ({login, isLoggedin}) => {
 	return (
 		<LoginRegister>
-			<form onSubmit={callApi} autoComplete="on">
+			{ isLoggedin ? <Redirect to="/" /> : null }
+			<form onSubmit={login} autoComplete="on">
 				<div className="login__register--leftconversation">
 					<input type="email" name="email" placeholder="Login id"/>
 					<input type="password" name="password" placeholder="Password"/>

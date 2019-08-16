@@ -6,6 +6,7 @@ export const register = (email, password, name) => async (dispatch) => {
             type: "LOGIN_REGISTER_REQUEST"
         });
         const response = await auth.register({email, password, name});
+        alert("Registered successfully!\nA verification email has been send to your registered mail address, please check");
         return dispatch({
             type: "REGISTER_SUCCESS",
             response
