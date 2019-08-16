@@ -24,7 +24,7 @@ export const register = (e) => async (dispatch) => {
     }
 }
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (e) => async (dispatch) => {
     try {
         e.preventDefault();
         dispatch({
