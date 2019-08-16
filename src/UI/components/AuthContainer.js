@@ -28,5 +28,3 @@ export default function({
         return <ChildComponent callApi={callAuthApi} />;
     }
 }
-
-export default AuthContainer;
