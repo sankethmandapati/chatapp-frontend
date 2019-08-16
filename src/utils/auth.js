@@ -53,7 +53,6 @@ class Auth {
 	async register(data) {
 		try {
 			const registerResponse = await this.callApi('register', data);
-			await this.setUserDetailsToCookies(registerResponse);
 			return registerResponse;
 		} catch(err) {
 			console.log("Error occured while registering: ", err);
