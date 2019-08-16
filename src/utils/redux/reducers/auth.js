@@ -6,12 +6,18 @@ export default (state = {}, action) => {
                 isLoading: true,
                 isLoggedin: false
             };
-        case "LOGIN_REGISTER_SUCCESS":
+        case "LOGIN_SUCCESS":
             return {
                 ...state,
                 isLoading: false,
                 isLoggedin: true,
                 userDetails: action.response
+            };
+        case "REGISTER_SUCCESS":
+            return {
+                ...state,
+                isLoading: false,
+                registeredSuccessfully: true
             };
         case "LOGIN_REGISTER_FAILURE":
             return {

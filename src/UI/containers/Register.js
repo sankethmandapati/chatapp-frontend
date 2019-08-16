@@ -1,13 +1,18 @@
 import {connect} from 'react-redux';
 import Register from '../components/Register';
-import * as authActions from '../../utils/redux/actions/auth';
-import AuthContainer from './AuthContainer';
+import { register } from '../../utils/redux/actions/auth';
+import AuthContainer from '../components/AuthContainer';
 
 const mapStateToProps = (state) => ({
-    isLoggedin: state.auth.isLoggedin,
+    registeredSuccessfully: state.auth.registeredSuccessfully,
     ChildComponent: Register
 });
 
-const AuthRegisterContainer = connect(mapStateToProps, authActions)(AuthContainer);
+const AuthRegisterContainer = connect(
+    mapStateToProps, 
+    {
+        callApi: register
+    }
+)(AuthContainer);
 
 export default AuthRegisterContainer;

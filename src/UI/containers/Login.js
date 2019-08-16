@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import Login from '../components/Login';
-import * as authActions from '../../utils/redux/actions/auth';
-import AuthContainer from './AuthContainer';
+import {login} from '../../utils/redux/actions/auth';
+import AuthContainer from '../components/AuthContainer';
 
 const mapStateToProps = (state) => {
     return {
@@ -10,6 +10,11 @@ const mapStateToProps = (state) => {
     };
 };
 
-const AuthLoginContainer = connect(mapStateToProps, authActions)(AuthContainer);
+const AuthLoginContainer = connect(
+    mapStateToProps, 
+    {
+        callApi: login
+    }
+)(AuthContainer);
 
 export default AuthLoginContainer;
