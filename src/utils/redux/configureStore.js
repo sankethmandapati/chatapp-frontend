@@ -15,7 +15,6 @@ export default () => {
     const middlewares = [thunk];
     middlewares.push(createLogger);
     const {isLoggedin, userDetails} = Auth.authenticate();
-    console.log("userDetails: ", userDetails);
     const initialState = {
         auth: {
             isLoggedin,
@@ -29,7 +28,7 @@ export default () => {
         friends: {
             friendsList: [],
             selectedFriend: {},
-            showFriendsListModal: true
+            hideFriendsListModal: false
         }
     };
     const store = createStore(reducer, initialState, applyMiddleware(...middlewares));

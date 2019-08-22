@@ -21,12 +21,12 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 selectedFriend: action.selectedFriend,
-                showFriendsListModal: false
+                hideFriendsListModal: true
             };
         case "TOGGLE_MODAL":
             return {
                 ...state,
-                showFriendsListModal: !state.showFriendsListModal
+                hideFriendsListModal: !state.hideFriendsListModal
             };
         default:
             return state;

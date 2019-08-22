@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
     myId: state.auth.userDetails.userId,
     friendId: state.friends.selectedFriend._id,
     friendsList: state.friends.friendsList,
-    showFriendsListModal: state.friends.showFriendsListModal
+    hideFriendsListModal: state.friends.hideFriendsListModal
 });
 
 const mapActionsToProps = {
@@ -31,23 +31,13 @@ class FriendsContainer extends Component {
         getChatHistory(selectedFriend._id, myId);
     }
 
-    searchFriend(e) {
-        e.preventDefault();
-        this.setState({friendSearch: e.target.value.toLowerCase()});
-    }
-
     render() {
-        let {friendsList, toggleModal, showFriendsListModal} = this.props;
-        friendsList = friendsList.filter((friend) => {
-            return friend.name.toLowerCase().includes(this.state.friendSearch);
-        });
-
+        let {friendsList, toggleModal, hideFriendsListModal} = this.props;
         return (
             <Friends 
-                showFriendsListModal={showFriendsListModal}
+                hideFriendsListModal={hideFriendsListModal}
                 friendsList={friendsList}
-                selectThsiFriend={this.selectFriend} 
-                searchFriend={this.searchFriend}
+                selectThisFriend={this.selectFriend}
                 toggleModal={toggleModal}
             />
         );
