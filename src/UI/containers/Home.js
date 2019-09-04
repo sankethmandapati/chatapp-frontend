@@ -29,7 +29,6 @@ class HomeContainer extends Component {
         this.updateFriendsList();
     }
     updateFriendsList() {
-        console.log("this.props: ", this.props);
         this.props.getFriendsList(this.props.selfId);
     }
     render() {

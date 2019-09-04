@@ -8,13 +8,13 @@ const Friends = ({
     selectThisFriend
 }) => {
     const [friendSearch, setFriendSearch] = useState('');
-    const [friends, setFriends] = useState([]);
+    const [friends, setFriends] = useState(friendsList);
     useEffect(() => {
         const filteredList = friendsList.filter((friend) => {
-            return friend.name.toLowerCase().includes(this.state.friendSearch);
+            return friend.name.toLowerCase().includes(friendSearch);
         });
         setFriends(filteredList);
-    }, [friendSearch]);
+    }, [friendSearch, friendsList]);
     const searchFriend = (e) => {
         e.preventDefault();
         setFriendSearch(e.target.value.toLowerCase());

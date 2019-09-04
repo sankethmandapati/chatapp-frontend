@@ -63,6 +63,7 @@ class Auth {
 		await cookies.set('accessToken', userDetails.accessToken, {path: '/'});
 		await cookies.set('userId', userDetails.userId, {path: '/'});
 		await cookies.set('userName', userDetails.userName, {path: '/'});
+		console.log("here");
 		socket.connect(userDetails.accessToken);
 	}
 	authenticate() {

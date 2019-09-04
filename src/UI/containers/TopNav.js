@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import TopNav from '../components/TopNav';
 import {logout} from '../../utils/redux/actions/auth';
 import {toggleModal} from '../../utils/redux/actions/friends';

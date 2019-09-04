@@ -10,7 +10,11 @@ class Socket {
         this.emit = this.emit.bind(this);
     }
     connect(accessToken) {
+        console.log("connect method");
+        console.log("this.isConnected: ", this.isConnected);
         if(!this.isConnected) {
+            console.log("not yet connected");
+            console.log("config.baseUrl: ", config.baseUrl);
             this.socketInstance = socketIoClient(config.baseUrl, {
                 query: {
                     token: accessToken

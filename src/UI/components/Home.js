@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Chat from './Chat';
 import Friends from '../containers/Friends';
 import "../../styles/Chat.scss";

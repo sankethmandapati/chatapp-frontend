@@ -23,7 +23,6 @@ class FriendsContainer extends Component {
             friendSearch: ""
         };
         this.selectFriend = this.selectFriend.bind(this);
-        this.searchFriend = this.searchFriend.bind(this);
     }
     selectFriend(selectedFriend) {
         const {selectFriend, getChatHistory, myId} = this.props;
