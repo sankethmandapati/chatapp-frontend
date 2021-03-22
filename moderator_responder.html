@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+  </script>
+  <style>
+    body {
+      height: calc(100% - 40px);
+      width: calc(100% - 40px);
+      padding: 20px;
+    }
+    body div {
+      height: calc(100vh - 200px);
+      width: 100%;
+      overflow-y: auto;
+    }
+    body form {
+      height: 100px;
+      width: 100vw;
+      display: flex;
+      flex-direction: row;
+    }
+    .radio-container {
+      margin-right: 20px;
+    }
+    #textInput {
+      flex: 1;
+      height: 100%;
+    }
+    body form button {
+      height: 100px;
+      width: 150px;
+      margin-left: 20px;
+    }
+    body form section {
+      display: block;
+    }
+    #placeholder {
+      padding: 15px 0;
+    }
+    #placeholder p {
+      font-size: 14px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    .moderator {
+      color: red;
+    }
+    .responder {
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="placeholder"></div>
+  <form id="my-form" onsubmit="onFormSubmit();">
+    <section class="radio-container">
+      <input id="mod" type="checkbox" name="mod_resp" />
+      <label for="mod_resp">Moderator</label>
+    </section>
+    <input id="textInput" name="inputData" value="" spellcheck="true" autocomplete="false" autosuggest="false" />
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    const form = document.getElementById('my-form');
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      const checkBox = document.getElementById('mod');
+      const isModerator = checkBox.checked;
+      const inputElement = document.getElementById('textInput');
+      const inputValue = inputElement.value;
+      const placeholder = document.getElementById('placeholder');
+      
+      
+      const newPara = document.createElement("p");
+
+      const newContent = document.createTextNode(`${isModerator ? 'M' : 'R'}- ${inputValue}s`);
+
+      newPara.appendChild(newContent);
+      const className = isModerator ? 'moderator' : 'responder';
+      newPara.classList.add(className);
+
+      placeholder.appendChild(newPara);
+      
+      inputElement.value = '';
+    };
+  </script>
+</body>
+</html>
